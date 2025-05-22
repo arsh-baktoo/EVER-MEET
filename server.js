@@ -1,19 +1,19 @@
-const cors = require("cors")
-app.use(cors({
-  origin: "https://ever-meet.vercel.app", // your Vercel frontend
-  methods: ["GET", "POST"]
-}))
-
-
 const express = require("express")
 const http = require("http")
 const { Server } = require("socket.io")
 const path = require("path")
+const cors = require("cors") // ✅ move this down
 
 // Create Express app
-const app = express()
+const app = express() // ✅ define app first
+app.use(cors({
+  origin: "https://ever-meet.vercel.app",
+  methods: ["GET", "POST"]
+}))
+
 const server = http.createServer(app)
 const io = new Server(server)
+
 
 // Serve static files
 app.use(express.static(path.join(__dirname, "public")))
