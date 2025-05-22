@@ -40,7 +40,8 @@ const themeDarkBtn = document.getElementById("theme-dark")
 const themeSpaceBtn = document.getElementById("theme-space")
 
 // Initialize socket connection
-const socket = window.io()
+const socket = window.io("https://ever-meet-production.up.railway.app")
+
 
 // Debug socket connection
 socket.on("connect", () => {
