@@ -1,18 +1,28 @@
-const express = require("express")
-const http = require("http")
-const { Server } = require("socket.io")
-const path = require("path")
-const cors = require("cors") // ✅ move this down
+const cors = require("cors");
+const express = require("express");
+const http = require("http");
+const { Server } = require("socket.io");
+const path = require("path");
 
-// Create Express app
-const app = express() // ✅ define app first
+const app = express();
+
+// ✅ Enable CORS for Vercel frontend
 app.use(cors({
   origin: "https://ever-meet.vercel.app",
-  methods: ["GET", "POST"]
-}))
+  methods: ["GET", "POST"],
+  credentials: true
+}));
 
-const server = http.createServer(app)
-const io = new Server(server)
+const server = http.createServer(app);
+
+// ✅ Pass CORS to socket.io too
+const io = new Server(server, {
+  cors: {
+    origin: "https://ever-meet.vercel.app",
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
 
 
 // Serve static files
