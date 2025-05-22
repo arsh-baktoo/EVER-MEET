@@ -1,3 +1,10 @@
+const cors = require("cors")
+app.use(cors({
+  origin: "https://ever-meet.vercel.app", // your Vercel frontend
+  methods: ["GET", "POST"]
+}))
+
+
 const express = require("express")
 const http = require("http")
 const { Server } = require("socket.io")
